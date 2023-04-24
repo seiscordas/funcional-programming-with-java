@@ -23,22 +23,29 @@ public class AddressResource {
         List<AddressDTO> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<List<AddressDTO>> findByPersonId(@PathVariable Long id) {
         List<AddressDTO> addressDTO = service.findAllByPersonId(id);
         return ResponseEntity.ok().body(addressDTO);
     }
+
     @PostMapping
     public ResponseEntity<AddressDTO> insert(@RequestBody AddressDTO dto) {
         dto = service.insert(dto);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(dto.getId())
+                .toUri();
         return ResponseEntity.created(uri).body(dto);
     }
+
     @PutMapping(value = "/{id}")
     public ResponseEntity<AddressDTO> update(@PathVariable Long id, @RequestBody AddressDTO dto) {
         dto = service.update(id, dto);
         return ResponseEntity.ok().body(dto);
     }
+
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
