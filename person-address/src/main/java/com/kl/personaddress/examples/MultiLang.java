@@ -1,4 +1,4 @@
-package com.kl.personaddress.resources;
+package com.kl.personaddress.examples;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
