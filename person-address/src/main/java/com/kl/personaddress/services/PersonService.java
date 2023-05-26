@@ -7,7 +7,7 @@ import com.kl.personaddress.services.exceptions.DatabaseException;
 import com.kl.personaddress.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.NoArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -18,9 +18,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@NoArgsConstructor
 @AllArgsConstructor
 public class PersonService {
-    @Autowired
+
     private PersonRepository repository;
 
     @Transactional(readOnly = true)

@@ -33,7 +33,7 @@ public class PersonAddressApplication {
 		var beanDefinitionScanner = new ClassPathBeanDefinitionScanner(beanRegistry);
 
 		beanDefinitionScanner.addIncludeFilter(removeModelAndEntitiesFilter());
-		beanDefinitionScanner.scan("com.kl");
+		//beanDefinitionScanner.scan("com.kl");
 	}
 
 	static TypeFilter removeModelAndEntitiesFilter() {
