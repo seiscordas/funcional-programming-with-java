@@ -1,5 +1,5 @@
 package com.kl.chess;
 
-public enum Color {
+public enum Player {
     WHITE, BLACK
 }

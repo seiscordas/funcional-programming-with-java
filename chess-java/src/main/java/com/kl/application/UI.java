@@ -1,8 +1,9 @@
 package com.kl.application;
 
+import com.kl.chess.ChessMatch;
 import com.kl.chess.ChessPiece;
 import com.kl.chess.ChessPosition;
-import com.kl.chess.Color;
+import com.kl.chess.Player;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -45,24 +46,44 @@ public class UI {
         }
     }
 
+    public static void printMatch(ChessMatch chessMatch){
+        printBoard(chessMatch.getPieces());
+        System.out.println();
+        System.out.println("Turn: " + chessMatch.getTurn());
+        System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+    }
+
     public static void printBoard(ChessPiece[][] pieces) {
+        printBoard(pieces, null);
+    }
+
+    public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
         System.out.println("  a b c d e f g h");
         for (int i = 0; i < pieces.length; i++) {
             System.out.print((8 - i) + " ");
             for (int j = 0; j < pieces[i].length; j++) {
-                printPiece(pieces[i][j]);
+                printPiece(pieces[i][j], possibleMoves != null && possibleMoves[i][j]);
             }
+            System.out.print((8 - i) + " ");
             System.out.println();
         }
+        System.out.println("  a b c d e f g h");
     }
 
-    private static void printPiece(ChessPiece piece) {
+    private static void printPiece(ChessPiece piece, boolean background) {
+        printBackgroundIfTrue(background);
         if (piece == null) {
-            System.out.print("-");
+            System.out.print("-" + ANSI_RESET);
         } else {
-            String colorCode = (piece.getColor() == Color.WHITE) ? ANSI_WHITE : ANSI_BLUE;
+            String colorCode = (piece.getPlayer() == Player.WHITE) ? ANSI_WHITE : ANSI_BLUE;
             System.out.print(colorCode + piece + ANSI_RESET);
         }
         System.out.print(" ");
+    }
+
+    private static void printBackgroundIfTrue(boolean background) {
+        if (background) {
+            System.out.print(ANSI_GREEN_BACKGROUND);
+        }
     }
 }
