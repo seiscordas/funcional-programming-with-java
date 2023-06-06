@@ -4,22 +4,24 @@ import com.kl.boardgame.Board;
 import com.kl.chess.ChessPiece;
 import com.kl.chess.Player;
 
-public class Rook extends ChessPiece {
-    public Rook(Board board, Player player) {
+public class Knight extends ChessPiece {
+    public Knight(Board board, Player player) {
         super(board, player);
     }
 
     @Override
     public boolean[][] possibleMoves() {
         int[][] directions = {
-                {-1, 0}, {1, 0}, {0, -1}, {0, 1}
+                {-1, -2}, {-2, -1},
+                {1, -2}, {2, -1},
+                {-1, 2}, {-2, 1},
+                {1, 2}, {2, 1},
         };
-
-        return calculatePossibleMovesForQueenBishopAndRook(directions);
+        return calculatePossibleMovesForKingAndKnight(directions);
     }
 
     @Override
     public String toString() {
-        return "R";
+        return "N";
     }
 }
