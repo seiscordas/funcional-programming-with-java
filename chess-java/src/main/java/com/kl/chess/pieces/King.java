@@ -38,7 +38,6 @@ public class King extends ChessPiece {
             for (Position[] positions : rookPositions) {
                 if (isRookCastling(positions[0])) {
                     if (canCastle(positions[1])) {
-                        chessMatch.setCastle(true);
                         possibleMoves[positions[1].getRow()][positions[1].getColumn()] = true;
                     }
                 }

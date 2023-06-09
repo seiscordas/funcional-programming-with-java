@@ -2,14 +2,16 @@ package com.kl.chess.pieces;
 
 import com.kl.boardgame.Board;
 import com.kl.boardgame.Position;
+import com.kl.chess.ChessMatch;
 import com.kl.chess.ChessPiece;
 import com.kl.chess.Player;
 
-import java.awt.*;
-
 public class Pawn extends ChessPiece {
-    public Pawn(Board board, Player player) {
+
+    private final ChessMatch chessMatch;
+    public Pawn(Board board, Player player, ChessMatch chessMatch) {
         super(board, player);
+        this.chessMatch = chessMatch;
     }
 
     @Override
@@ -36,6 +38,26 @@ public class Pawn extends ChessPiece {
             if (getBoard().positionExists(capture) && getBoard().thereIsAPiece(capture)
                     && isThereOpponentPiece(capture)) {
                 possibleMoves[capture.getRow()][capture.getColumn()] = true;
+            }
+        }
+
+        if (chessMatch.getEnPassantVulnerable() != null) {
+            Position leftCapture = new Position(currentPosition.getRow(), currentPosition.getColumn() - 1);
+            Position rightCapture = new Position(currentPosition.getRow(), currentPosition.getColumn() + 1);
+
+            if (getBoard().positionExists(leftCapture)) {
+                ChessPiece leftPiece = (ChessPiece) getBoard().piece(leftCapture);
+
+                if (leftPiece == chessMatch.getEnPassantVulnerable()) {
+                    possibleMoves[leftCapture.getRow() + direction][leftCapture.getColumn()] = true;
+                }
+            }
+            if (getBoard().positionExists(rightCapture)) {
+                ChessPiece rightPiece = (ChessPiece) getBoard().piece(rightCapture);
+
+                if (rightPiece == chessMatch.getEnPassantVulnerable()) {
+                    possibleMoves[rightCapture.getRow() + direction][rightCapture.getColumn()] = true;
+                }
             }
         }
 
