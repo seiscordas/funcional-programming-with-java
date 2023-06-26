@@ -191,3 +191,15 @@ public class Main {
 
 
 MAP----------------------------------------//
+
+SQL Queries
+
+SELECT * FROM SeguradoraComissao WHERE seg_codigo = 23;
+
+SELECT * FROM Seguradoras s WHERE NOT EXISTS(SELECT 1 FROM SeguradoraComissao sc WHERE s.seg_codigo = sc.seg_codigo)
+
+SELECT * FROM SeguradoraComissao sc WHERE NOT EXISTS(SELECT 1 FROM Seguradoras s WHERE s.seg_codigo = sc.seg_codigo)
+
+SELECT COUNT(*) AS Quantidade, seg_codigo FROM SeguradoraComissao;
+
+SELECT sc.sec_codigo, s.seg_descricao FROM SeguradoraComissao sc INNER JOIN Seguradoras s ON s.seg_codigo = sc.seg_codigo
