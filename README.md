@@ -1,6 +1,14 @@
 # funcional-programming-with-java
 Repository for sample of funcional programming
 
+PrimeFaces
+------------------------------------------->
+link com imagem chamando um metodo no back end e passando um paramentro Long id usando ajax
+<h:commandLink actionListener="#{auxiliarBean.teste(23)}">
+	<p:graphicImage value="../resources/images/refresh.png" />
+	<f:ajax execute="@this" render="@form" />
+</h:commandLink>
+
 MAP---------------------------------------->
 package com.br.glass;
 
