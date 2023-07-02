@@ -1,15 +1,64 @@
 # funcional-programming-with-java
 Repository for sample of funcional programming
 
-PrimeFaces
-------------------------------------------->
+################ PrimeFaces ################
+
 link com imagem chamando um metodo no back end e passando um paramentro Long id usando ajax
 <h:commandLink actionListener="#{auxiliarBean.teste(23)}">
 	<p:graphicImage value="../resources/images/refresh.png" />
 	<f:ajax execute="@this" render="@form" />
 </h:commandLink>
 
-MAP---------------------------------------->
+######################## Resques SOAP ###################
+import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+import org.w3c.dom.Document;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+public class SOAPClient {
+
+    public static void main(String[] args) {
+        // Configurar a URL do endpoint do serviço SOAP
+        String endpointUrl = "http://klsites.com.br/soap-endpoint";
+
+        // Criar uma instância da fábrica de proxy do Apache CXF
+        JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
+
+        // Definir a URL do endpoint do serviço
+        factory.setAddress(endpointUrl);
+
+        // Definir a classe do serviço
+        factory.setServiceClass(YourServiceInterface.class);
+
+        // Criar um proxy para o serviço
+        YourServiceInterface service = (YourServiceInterface) factory.create();
+
+        // Chamar o método generateProposal
+        String marcaVeiculo = "ExemploMarca";
+        String nome = "ExemploNome";
+        int ano = 2023;
+        String xmlResponse = service.generateProposal(marcaVeiculo, nome, ano);
+
+        // Processar a resposta XML
+        try {
+            // Criar um documento XML a partir do XML de resposta
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document responseDoc = builder.parse(new InputSource(new StringReader(xmlResponse)));
+
+            // Extrair os dados desejados do XML
+            // Exemplo: obter o valor de um elemento específico
+            String resultado = responseDoc.getElementsByTagName("resultado").item(0).getTextContent();
+            System.out.println("Resultado: " + resultado);
+
+            // Outras operações de processamento do XML podem ser realizadas conforme necessário
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+######################### MAP Json #################################
 package com.br.glass;
 
 import java.util.Comparator;
