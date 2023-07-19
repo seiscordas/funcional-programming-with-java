@@ -1,3 +1,14 @@
+##### mes posterior ######
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+LocalDate dataAtual = LocalDate.now();
+LocalDate dataMesPosterior = dataAtual.plusMonths(1);
+
+DateTimeFormatter formatoMesAno = DateTimeFormatter.ofPattern("MMyyyy");
+return dataAtual.format(formatoMesAno) + "/" + dataMesPosterior.format(formatoMesAno);
+#####################
+
 # funcional-programming-with-java
 Repository for sample of funcional programming
 
