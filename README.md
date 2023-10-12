@@ -1,4 +1,4 @@
-##### Date, Local Date e Instant ######
+##################### Date, Local Date e Instant #####################
 ```
 private static void testeDataLocalDateInstant() {
         Instant now = Instant.now();
@@ -9,8 +9,8 @@ private static void testeDataLocalDateInstant() {
         System.out.println("localDateTime: " + localDateTime); //localDateTime: 2023-10-12T19:43:21.662118849
     }
 ```
-##### uni em uma string valores de um array separado por virgula ######
-##### Uni em uma string valores de um array com aspas simples separado por virgula ######
+##################### uni em uma string valores de um array separado por virgula #####################
+##################### Uni em uma string valores de um array com aspas simples separado por virgula #####################
 ```
 String[] arrEstados = {"PR", "SP", "SC"};
 String[] arrCidCodigos = {"1", "3", "6"};
