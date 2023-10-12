@@ -1,5 +1,5 @@
 ##### Date, Local Date e Instant ######
-{
+```
 private static void testeDataLocalDateInstant() {
         Instant now = Instant.now();
         LocalDate localDate = LocalDate.now();
@@ -8,11 +8,10 @@ private static void testeDataLocalDateInstant() {
         System.out.println("localDate: " + localDate); //localDate: 2023-10-12
         System.out.println("localDateTime: " + localDateTime); //localDateTime: 2023-10-12T19:43:21.662118849
     }
-{
-
+```
 ##### uni em uma string valores de um array separado por virgula ######
 ##### Uni em uma string valores de um array com aspas simples separado por virgula ######
-
+```
 String[] arrEstados = {"PR", "SP", "SC"};
 String[] arrCidCodigos = {"1", "3", "6"};
 
@@ -32,8 +31,9 @@ public static String unirStringEntreAspasComVirgula(String[] arrEstados){
 
         return resultado.toString();
     }
-
+```
 ##### mes posterior ######
+```
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -42,20 +42,22 @@ LocalDate dataMesPosterior = dataAtual.plusMonths(1);
 
 DateTimeFormatter formatoMesAno = DateTimeFormatter.ofPattern("MMyyyy");
 return dataAtual.format(formatoMesAno) + "/" + dataMesPosterior.format(formatoMesAno);
+```
 #####################
 
 # funcional-programming-with-java
 Repository for sample of funcional programming
 
 ################ PrimeFaces ################
-
+```
 link com imagem chamando um metodo no back end e passando um paramentro Long id usando ajax
 <h:commandLink actionListener="#{auxiliarBean.teste(23)}">
 	<p:graphicImage value="../resources/images/refresh.png" />
 	<f:ajax execute="@this" render="@form" />
 </h:commandLink>
-
+```
 ######################## Resques SOAP ###################
+```
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.w3c.dom.Document;
 import javax.xml.parsers.DocumentBuilder;
@@ -104,3 +106,4 @@ public class SOAPClient {
         }
     }
 }
+```
