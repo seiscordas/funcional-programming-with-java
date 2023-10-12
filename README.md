@@ -1,5 +1,5 @@
 ##### Date, Local Date e Instant ######
-
+{
 private static void testeDataLocalDateInstant() {
         Instant now = Instant.now();
         LocalDate localDate = LocalDate.now();
@@ -8,6 +8,7 @@ private static void testeDataLocalDateInstant() {
         System.out.println("localDate: " + localDate); //localDate: 2023-10-12
         System.out.println("localDateTime: " + localDateTime); //localDateTime: 2023-10-12T19:43:21.662118849
     }
+{
 
 ##### uni em uma string valores de um array separado por virgula ######
 ##### Uni em uma string valores de um array com aspas simples separado por virgula ######
