@@ -1,3 +1,59 @@
+##################### Pesquisa em varias base de dados por um registro #####################
+```
+DROP PROCEDURE IF EXISTS `SearchInAllDatabases`;
+DELIMITER //
+
+CREATE PROCEDURE IF NOT EXISTS SearchInAllDatabases(IN search_id INT)
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE db_name VARCHAR(255);
+    DECLARE sql_query TEXT DEFAULT '';
+    
+    -- Cursor para percorrer todas as bases de dados
+    DECLARE db_cursor CURSOR FOR 
+        SELECT
+    		TABLE_SCHEMA database_name
+		FROM
+    		INFORMATION_SCHEMA.TABLES
+		WHERE
+    		TABLE_NAME = 'NomeTabela'
+		ORDER BY database_name;
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    OPEN db_cursor;
+
+    read_loop: LOOP
+        FETCH db_cursor INTO db_name;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+
+        -- Constrói a consulta SQL
+        SET sql_query = CONCAT(sql_query, 
+            'SELECT COUNT(cri_codigo) FROM ', db_name, '.NomeTabela WHERE cri_codigo = ', search_id, ' UNION ALL ');
+    END LOOP;
+
+    CLOSE db_cursor;
+
+    -- Remove o último 'UNION ALL' se houver alguma consulta
+    IF LENGTH(sql_query) > 0 THEN
+        SET sql_query = LEFT(sql_query, LENGTH(sql_query) - LENGTH(' UNION ALL '));
+
+        -- Executa a consulta gerada
+        SET @final_query = sql_query; -- Armazena a consulta em uma variável
+        PREPARE stmt FROM @final_query; -- Prepara a consulta
+        EXECUTE stmt; -- Executa a consulta
+        DEALLOCATE PREPARE stmt; -- Libera a memória
+    END IF;
+END //
+
+DELIMITER ;
+
+CALL SearchInAllDatabases(30);
+
+```
+
 ##################### Date, Local Date e Instant #####################
 ```
 private static void testeDataLocalDateInstant() {
